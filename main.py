@@ -23,4 +23,4 @@ if __name__ == "__main__":
 
     # Processa e exibe o resultado
     print("Processando Pedidos:")
-    service.processar_pedidos()
+    service.processar_pedido()
