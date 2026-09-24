@@ -1,7 +1,7 @@
 from src.models.pedido import Pedido
 
 class PedidoService:
-    """Classe de servoço para processar pedido e aplicar descontos"""
+    """Classe de serviço para processar pedido e aplicar descontos"""
 
     def __init__(self):
         self.pedidos=[]
