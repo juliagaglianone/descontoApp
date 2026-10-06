@@ -1,26 +1,28 @@
-from src.models.desconto import DescontoNormal, DescontoVIP, DescontoPremium
-from src.models.pedido import Pedido
+from src.controllers.pedido_controller import PedidoController
+from src.repositories.pedido_repository import PedidoRepository
 from src.services.pedido_service import PedidoService
+from src.database.connection import DatabaseConnection
+from src.models.pedido import Pedido
+from src.models.desconto import DescontoNormal, DescontoVIP, DescontoPremium
 
 if __name__ == "__main__":
-    # Instancia o serviço
-    service = PedidoService()
+    
+    database = DatabaseConnection()
+    repo = PedidoRepository(database)
+    service = PedidoService(repo)
+    controller = PedidoController(service)
 
-    # Cria pedidos com diferentes descontos
-    pedido1 = Pedido("Leonardo", DescontoVIP())
+    pedido1 = Pedido("Cliente 1", DescontoNormal())
     pedido1.valor_original = 100.0
 
-    pedido2 = Pedido("Maria", DescontoNormal())
-    pedido2.valor_original = 200.0
+    pedido2 = Pedido("Cliente 2", DescontoVIP())
+    pedido2.valor_original = 100.0
 
-    pedido3 = Pedido("Carlos", DescontoPremium())
-    pedido3.valor_original = 150.0
+    pedido3 = Pedido("Cliente 3", DescontoPremium())
+    pedido3.valor_original = 100.0
 
-    # Adiciona os pedidos ao serviço
-    service.adicionar_pedido(pedido1)
-    service.adicionar_pedido(pedido2)
-    service.adicionar_pedido(pedido3)
+    controller.adicionar_pedido(pedido1)
+    controller.adicionar_pedido(pedido2)
+    controller.adicionar_pedido(pedido3)
 
-    # Processa e exibe o resultado
-    print("Processando Pedidos:")
-    service.processar_pedido()
+    controller.processar_pedidos()
