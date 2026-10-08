@@ -1,7 +1,7 @@
 import abc
 
 class IDesconto(abc.ABC):
-    @abc.abctractmethod
+    @abc.abstractmethod
     def calcular(self,valor:float)-> float:
         pass
 
